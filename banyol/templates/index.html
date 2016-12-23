@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<script src="static/angular.min.js"></script>
+<body>
+
+<div ng-app="">
+  <form method="post" action="/search">
+    <input type="text" name="text" value="" required="true">
+    <input type="submit" text="submit">
+  </form>
+</div>
+
+{%for res in result%}
+  <h4><a href="file://{{res[1]}}">{{res[0]}}</a></h4>
+  <p>{{res[1]}}
+{% endfor %}
+
+</body>
+</html>
