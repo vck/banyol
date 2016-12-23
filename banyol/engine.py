@@ -59,13 +59,13 @@ def search():
     query = request.form["text"].lower()
     if query:
         documents = cur.execute("SELECT * FROM corpora").fetchall()
-        print "checking query: {0} on documents with length {1}".format(query, len(documents))
         result = []
         for doc in documents:
             a, b = vsm3(query, doc[1])
             dot = np.dot(a, b)
             if dot > 0:
                 res = (doc[1], cur.execute("SELECT filename FROM berkas WHERE id={}".format(doc[0])).fetchall()[0][0])
+                result.append(res)
         if result:
             print "found match: {}".format(len(result))
             return render_template('index.html', result=result)
